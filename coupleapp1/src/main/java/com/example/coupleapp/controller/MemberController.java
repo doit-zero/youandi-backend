@@ -1,32 +1,20 @@
 package com.example.coupleapp.controller;
 
-
-import com.example.coupleapp.entity.ImageEntity;
-import com.example.coupleapp.repository.ImageRepository;
-import com.example.coupleapp.security.AuthHolder;
 import com.example.coupleapp.security.JwtUtil;
 import com.example.coupleapp.dto.LoginRequestDTO;
 import com.example.coupleapp.dto.MemberDTO;
 import com.example.coupleapp.dto.TokenDTO;
-import com.example.coupleapp.service.S3ImageService;
 import com.example.coupleapp.service.MemberService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
+
 
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 @Api(tags = "회원 관련 API")
 @Slf4j
@@ -36,8 +24,6 @@ import java.util.Optional;
 public class MemberController {
 
     private final MemberService memberService;
-    private final S3ImageService s3ImageService;
-    private final ImageRepository imageRepository;
 
 
     @ApiOperation(value = "회원가입")
@@ -55,6 +41,12 @@ public class MemberController {
         httpServletResponse.setHeader(JwtUtil.ACCESS_TOKEN,tokenDTO.getAccessToken());
         return ResponseEntity.ok().body(tokenDTO);
     }
+
+    @PostMapping()
+    public String test(@RequestBody Map<String,Map<String,Object>> jsonData) {
+        return jsonData.toString();
+    }
+
 
 
 //    @ApiOperation(value = "이미지리스트 업로드 테스트")

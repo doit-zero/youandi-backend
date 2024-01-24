@@ -27,9 +27,8 @@ public class MemoRepositoryImpl implements MemoRepositoryCustom{
         QueryResults<Tuple> results = queryFactory
                 .select(memo.id,memo.memoContent,memo.created_at)
                 .from(memo)
-                .where(memo.member.id.eq(member.getId())
-                        .and(memo.myPhoneNumber.eq(member.getMy_phone_number())
-                                .or(memo.myPhoneNumber.eq(memo.yourPhoneNumber))))
+                .where(memo.myPhoneNumber.eq(member.getMy_phone_number())
+                                .or(memo.myPhoneNumber.eq(member.getYour_phone_number())))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();

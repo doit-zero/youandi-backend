@@ -68,7 +68,7 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public String uploadMediaList(List<MultipartFile> mediaFiles, Long memberId)  {
-        if(mediaFiles.size() == 0) throw new MediaException(MediaErrorCode.NOT_REGISST_FILE);
+        if(mediaFiles.isEmpty()) throw new MediaException(MediaErrorCode.NOT_REGISST_FILE);
 
         MemberEntity member = memberRepository.findMemberById(memberId);
 
@@ -112,7 +112,6 @@ public class MediaServiceImpl implements MediaService {
         result.put("totalPages", getMediaList.getTotalPages());
         result.put("hasPrevious", getMediaList.hasPrevious());
         result.put("hasNext", getMediaList.hasNext());
-
 
 
         return result;

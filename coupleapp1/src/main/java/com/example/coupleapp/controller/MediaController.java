@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,7 +46,7 @@ public class MediaController {
     @PostMapping(consumes = "multipart/form-data")
     @ApiOperation(value = "여러개 미디어 업로드 / Total 10MB 이하만 전송 가능")
     public ResponseEntity<?> uploadMediaList(
-            @RequestParam("mediaFiles") List<MultipartFile>  mediaFiles) throws IOException {
+            @RequestParam List<MultipartFile> mediaFiles) throws IOException {
         Long memberId = AuthHolder.getMemberId();
         String savedMediaList = mediaService.uploadMediaList(mediaFiles,memberId);
         return ResponseEntity.ok().body(savedMediaList);

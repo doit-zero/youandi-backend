@@ -30,9 +30,8 @@ public class MediaRepositoryImpl implements MediaRepositoryCustom{
         QueryResults<Tuple> results = queryFactory
                 .select(media.id,media.media_url,media.created_at)
                 .from(media)
-                .where(media.member.id.eq(member.getId())
-                        .and(media.my_phone_number.eq(member.getMy_phone_number())
-                                .or(media.my_phone_number.eq(member.getYour_phone_number()))))
+                .where(media.my_phone_number.eq(member.getMy_phone_number())
+                                .or(media.my_phone_number.eq(member.getYour_phone_number())))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
